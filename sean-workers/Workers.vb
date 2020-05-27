@@ -25,7 +25,7 @@ Public Class Workers
     End Property
 #End Region
 
-    Sub New(Optional queueInterval As Integer = 100, Optional _useBuffer As Boolean = False)
+    Sub New(Optional queueInterval As Integer = 1000, Optional _useBuffer As Boolean = False)
         QueueArgs = New List(Of Object)
         init_Timer()
         SetTimer(queueInterval)
@@ -101,7 +101,7 @@ Public Class Workers
     Private Sub queueTimer_Tick(sender As Object)
         UpdateQueue()
         If Not IsBusy Then
-            StartWorking()
+            StopWorking()
             RaiseEvent RunWorkersCompleted(Me)
         End If
     End Sub
